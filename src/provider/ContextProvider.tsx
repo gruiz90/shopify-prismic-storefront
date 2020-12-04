@@ -1,26 +1,41 @@
-import fetch from 'isomorphic-fetch'
-import React, { useState, useEffect } from 'react'
+import 'isomorphic-fetch'
+import React, { useState, useEffect, FC } from 'react'
 import Client from 'shopify-buy'
 
-import Context from '~/context/StoreContext'
+import Context from '~context/StoreContext'
 
-const client = Client.buildClient(
-  {
-    storefrontAccessToken: process.env.SHOPIFY_ACCESS_TOKEN,
-    domain: `${process.env.SHOP_NAME}.myshopify.com`,
-  },
-  fetch
-)
+const client = Client.buildClient({
+  storefrontAccessToken: process.env.SHOPIFY_ACCESS_TOKEN || '',
+  domain: `${process.env.SHOP_NAME}.myshopify.com`,
+})
 
-const ContextProvider = ({ children }) => {
-  let initialStoreState = {
+interface IProps {
+  children: React.ReactNode
+}
+
+interface IStoreState {
+  client: Client.Client
+  adding: boolean
+  checkout: Client.Cart
+  products: Client.Product[]
+  shop: unknown
+}
+
+const ContextProvider: FC<IProps> = ({ children }) => {
+  const initialStoreState: IStoreState = {
     client,
     adding: false,
-    checkout: { lineItems: [] },
+    checkout: {
+      id: '',
+      checkoutUrl: '',
+      lineItemCount: 0,
+      lineItems: [],
+      subtotalPrice: '',
+      completedAt: null,
+    },
     products: [],
     shop: {},
   }
-
   const [store, updateStore] = useState(initialStoreState)
   let isRemoved = false
 
@@ -32,9 +47,9 @@ const ContextProvider = ({ children }) => {
         ? localStorage.getItem('shopify_checkout_id')
         : null
 
-      const setCheckoutInState = checkout => {
+      const setCheckoutInState = (checkout: Client.Cart) => {
         if (isBrowser) {
-          localStorage.setItem('shopify_checkout_id', checkout.id)
+          localStorage.setItem('shopify_checkout_id', String(checkout.id))
         }
 
         updateStore(prevState => {
@@ -43,7 +58,7 @@ const ContextProvider = ({ children }) => {
       }
 
       const createNewCheckout = () => store.client.checkout.create()
-      const fetchCheckout = id => store.client.checkout.fetch(id)
+      const fetchCheckout = (id: string) => store.client.checkout.fetch(id)
 
       if (existingCheckoutID) {
         try {
@@ -54,7 +69,7 @@ const ContextProvider = ({ children }) => {
             return
           }
         } catch (e) {
-          localStorage.setItem('shopify_checkout_id', null)
+          localStorage.setItem('shopify_checkout_id', '')
         }
       }
 
@@ -78,7 +93,7 @@ const ContextProvider = ({ children }) => {
     <Context.Provider
       value={{
         store,
-        addVariantToCart: (variantId, quantity) => {
+        addVariantToCart: (variantId: string, quantity: number) => {
           if (variantId === '' || !quantity) {
             console.error('Both a size and quantity are required.')
             return
@@ -91,9 +106,7 @@ const ContextProvider = ({ children }) => {
           const { checkout, client } = store
 
           const checkoutId = checkout.id
-          const lineItemsToUpdate = [
-            { variantId, quantity: parseInt(quantity, 10) },
-          ]
+          const lineItemsToUpdate = [{ variantId, quantity }]
 
           return client.checkout
             .addLineItems(checkoutId, lineItemsToUpdate)
@@ -103,7 +116,11 @@ const ContextProvider = ({ children }) => {
               })
             })
         },
-        removeLineItem: (client, checkoutID, lineItemID) => {
+        removeLineItem: (
+          client: Client.Client,
+          checkoutID: string | number,
+          lineItemID: string
+        ) => {
           return client.checkout
             .removeLineItems(checkoutID, [lineItemID])
             .then(res => {
@@ -112,13 +129,16 @@ const ContextProvider = ({ children }) => {
               })
             })
         },
-        updateLineItem: (client, checkoutID, lineItemID, quantity) => {
-          const lineItemsToUpdate = [
-            { id: lineItemID, quantity: parseInt(quantity, 10) },
-          ]
+        updateLineItem: (
+          client: Client.Client,
+          checkoutID: string | number,
+          lineItemID: string,
+          quantity: number
+        ) => {
+          const lineItemsToUpdate = [{ id: lineItemID, quantity: quantity }]
 
           return client.checkout
-            .updateLineItems(checkoutID, lineItemsToUpdate)
+            .updateLineItem(checkoutID, lineItemsToUpdate)
             .then(res => {
               updateStore(prevState => {
                 return { ...prevState, checkout: res }

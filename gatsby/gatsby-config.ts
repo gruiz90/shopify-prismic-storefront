@@ -1,8 +1,9 @@
-const path = require('path');
+import path from 'path'
+import dotenv from 'dotenv'
 
-require('dotenv').config({
+dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
-});
+})
 
 module.exports = {
   siteMetadata: {
@@ -61,7 +62,14 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-root-import',
       options: {
-        '~': path.join(__dirname, '..', 'src'),
+        '~components': path.join(__dirname, '..', 'src/components'),
+        '~context': path.join(__dirname, '..', 'src/context'),
+        '~images': path.join(__dirname, '..', 'src/images'),
+        '~layouts': path.join(__dirname, '..', 'src/layouts'),
+        '~pages': path.join(__dirname, '..', 'src/pages'),
+        '~provider': path.join(__dirname, '..', 'src/provider'),
+        '~templates': path.join(__dirname, '..', 'src/templates'),
+        '~utils': path.join(__dirname, '..', 'src/utils'),
       },
     },
     {
@@ -76,4 +84,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
   ],
-};
+}

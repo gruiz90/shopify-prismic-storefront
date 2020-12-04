@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Link } from 'gatsby'
 
-import SEO from '~/components/seo'
-import ProductGrid from '~/components/ProductGrid'
+import SEO from '~components/seo'
+import ProductGrid from '~components/ProductGrid'
 
-const IndexPage = () => (
+const IndexPage: FC = () => (
   <>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
     <h1>Hi people</h1>

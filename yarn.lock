@@ -1944,6 +1944,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/isomorphic-fetch@0.0.35":
+  version "0.0.35"
+  resolved "https://registry.yarnpkg.com/@types/isomorphic-fetch/-/isomorphic-fetch-0.0.35.tgz#c1c0d402daac324582b6186b91f8905340ea3361"
+  integrity sha512-DaZNUvLDCAnCTjgwxgiL1eQdxIKEpNLOlTNtAgnZc50bG2copGhRrFN9/PxPBuJe+tZVLCbQ7ls0xveXVRPkvw==
+
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.3.tgz#4ba8ddb720221f432e443bd5f9117fd22cfd4762"
@@ -2083,6 +2088,11 @@
   dependencies:
     "@types/glob" "*"
     "@types/node" "*"
+
+"@types/shopify-buy@^2.10.3":
+  version "2.10.3"
+  resolved "https://registry.yarnpkg.com/@types/shopify-buy/-/shopify-buy-2.10.3.tgz#9c5f1f45c80feb914f6699c4c52a5a3158877e53"
+  integrity sha512-PzVmJ+B1NN5DijENIHXDtE8hWrWxFocMhYvPJqV5kOhGN7DRdCaKMXQlxhZjP1DLGs7mKDmU8VDv1Mk+TgRZww==
 
 "@types/tmp@^0.0.33":
   version "0.0.33"
@@ -5468,6 +5478,11 @@ eslint-config-react-app@^5.2.1:
   integrity sha512-pGIZ8t0mFLcV+6ZirRgYK6RVqUIKRIi9MmgzUEmrIknsn3AdO0I32asO86dJgloHq+9ZPl8UIg8mYrvgP5u2wQ==
   dependencies:
     confusing-browser-globals "^1.0.9"
+
+eslint-import-resolver-alias@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/eslint-import-resolver-alias/-/eslint-import-resolver-alias-1.1.2.tgz#297062890e31e4d6651eb5eba9534e1f6e68fc97"
+  integrity sha512-WdviM1Eu834zsfjHtcGHtGfcu+F30Od3V7I9Fi57uhBEwPkjDcii7/yW8jAT+gOhn4P/vOxxNAXbFAKsrrc15w==
 
 eslint-import-resolver-node@^0.3.4:
   version "0.3.4"

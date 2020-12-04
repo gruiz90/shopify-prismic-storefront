@@ -1,10 +1,33 @@
-import React, { useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import { Link } from 'gatsby'
 
-import StoreContext from '~/context/StoreContext'
+import StoreContext from '~context/StoreContext'
 import { Wrapper } from './styles'
 
-const LineItem = props => {
+interface IProps {
+  item: {
+    id: string
+    title: string
+    quantity: number
+    variant: {
+      title: string
+      product: {
+        handle: string
+      }
+      image?: {
+        src: string
+      }
+      selectedOptions: [
+        {
+          name: string
+          value: string
+        }
+      ]
+    }
+  }
+}
+
+const LineItem: FC<IProps> = props => {
   const { item } = props
   const {
     removeLineItem,
@@ -38,7 +61,7 @@ const LineItem = props => {
       <p>
         {item.title}
         {`  `}
-        {item.variant.title === !'Default Title' ? item.variant.title : ''}
+        {item.variant.title !== 'Default Title' ? item.variant.title : ''}
       </p>
       {selectedOptions}
       {item.quantity}

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { FC } from 'react'
 import Image from 'gatsby-image'
 import styled from '@emotion/styled'
-import { Global, css } from '@emotion/react'
+import { Global, css, GlobalProps } from '@emotion/react'
 
 export const breakpoints = {
   s: 576,
@@ -10,7 +10,7 @@ export const breakpoints = {
   xl: 1200,
 }
 
-export const GlobalStyle = props => (
+export const GlobalStyle: FC<JSX.IntrinsicAttributes & GlobalProps> = props => (
   <Global
     {...props}
     styles={css`

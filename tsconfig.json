@@ -10,7 +10,18 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "noUnusedLocals": false,
-    "allowJs": true
+    "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "~components/*": ["./src/components/*"],
+      "~context/*": ["./src/context/*"],
+      "~images/*": ["./src/images/*"],
+      "~layouts/*": ["./src/layouts/*"],
+      "~pages/*": ["./src/pages/*"],
+      "~provider/*": ["./src/provider/*"],
+      "~templates/*": ["./src/templates/*"],
+      "~utils/*": ["./src/utils/*"]
+    }
   },
   "exclude": ["node_modules", "public", ".cache"]
 }

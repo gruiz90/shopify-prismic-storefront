@@ -1,8 +1,7 @@
-import React, { useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import reduce from 'lodash/reduce'
-import PropTypes from 'prop-types'
 
-import StoreContext from '~/context/StoreContext'
+import StoreContext from '~context/StoreContext'
 import { CartCounter, Container, MenuLink, Wrapper } from './styles'
 
 const useQuantity = () => {
@@ -14,7 +13,11 @@ const useQuantity = () => {
   return [total !== 0, total]
 }
 
-const Navigation = ({ siteTitle }) => {
+interface IProps {
+  siteTitle: string
+}
+
+const Navigation: FC<IProps> = ({ siteTitle = '' }) => {
   const [hasItems, quantity] = useQuantity()
 
   return (
@@ -28,14 +31,6 @@ const Navigation = ({ siteTitle }) => {
       </Container>
     </Wrapper>
   )
-}
-
-Navigation.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Navigation.defaultProps = {
-  siteTitle: ``,
 }
 
 export default Navigation

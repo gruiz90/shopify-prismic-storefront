@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Link } from 'gatsby'
 
-import SEO from '~/components/seo'
+import SEO from '~components/seo'
 
-const SecondPage = () => (
+const SecondPage: FC = () => (
   <>
     <SEO title="Page two" />
     <h1>Hi from the second page</h1>

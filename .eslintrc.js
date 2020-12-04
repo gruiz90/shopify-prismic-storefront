@@ -11,6 +11,18 @@ module.exports = {
     react: {
       version: 'detect',
     },
+    'import/resolver': {
+      alias: [
+        ['~components', '.src/components'],
+        ['~context', '.src/context'],
+        ['~images', '.src/images'],
+        ['~layouts', '.src/layouts'],
+        ['~pages', '.src/pages'],
+        ['~provider', '.src/provider'],
+        ['~templates', '.src/templates'],
+        ['~utils', '.src/utils'],
+      ],
+    },
   },
   env: {
     browser: true,
@@ -38,4 +50,4 @@ module.exports = {
       },
     },
   ],
-};
+}
